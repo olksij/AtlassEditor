@@ -158,6 +158,7 @@ namespace FixerEditor
 
             // Dropdown of file types the user can save the file as
             savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
+            savePicker.FileTypeChoices.Add("C Sharp", new List<string>() { ".cs" });
 
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = "New File";
