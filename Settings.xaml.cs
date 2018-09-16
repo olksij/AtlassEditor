@@ -36,6 +36,8 @@ namespace FixerEditor
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Settings";
+
+            SetTheme();
         }
 
         private void LightThemeRB(object sender, RoutedEventArgs e)
