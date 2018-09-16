@@ -32,10 +32,24 @@
                     FontWeight="Normal"
                     Text="App mode" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
                 <StackPanel Margin="0,9,0,0" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <RadioButton x:Name="RBTS" Content="System" Click="SystemThemeRB" IsChecked="True"/>
                     <RadioButton x:Name="RBTL" Content="Light" Click="LightThemeRB" IsChecked="False"/>
                     <RadioButton x:Name="RBTD" Content="Dark" Click="DarkThemeRB" IsChecked="False"/>
                 </StackPanel>
+                <TextBlock
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    Margin="0,10,0,0"
+                    FontWeight="Normal"
+                    Text="App accent color" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="20" />
+                <StackPanel Margin="0,9,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Vertical">
+                    <RadioButton x:Name="RBCC" Content="Contrasted" Click="ChangeAppColor" IsChecked="False"/>
+                    <RadioButton x:Name="RBCB" Content="Blue" Click="ChangeAppColor" IsChecked="False"/>
+                    <RadioButton x:Name="RBCR" Content="Red" Click="ChangeAppColor" IsChecked="False"/>
+                    <RadioButton x:Name="RBCG" Content="Green" Click="ChangeAppColor" IsChecked="False"/>
+                    <RadioButton x:Name="RBCY" Content="Yellow" Click="ChangeAppColor" IsChecked="False"/>
+                    <Button Visibility="Collapsed" x:Name="Refreshcolors" Content="Click here to refresh colors" Margin="0,10,0,0" Click="RefreshColors"/>
+                </StackPanel>
+
+
             </StackPanel>
         </ScrollViewer>
 

@@ -27,8 +27,9 @@ namespace FixerEditor
     /// </summary>
     public sealed partial class Settings : Page
     {
-        public static int Theme = 2; // 1 - Light; 2 - Dark;
-        
+        public static int Theme = 2; // 0 - Systemdefault;  1 - Light; 2 - Dark;
+        public static int AppColor = 2; // 1 - Contrast; 2 - Blue; 3 - Red; 4 - Green; 5 - Yellow;
+
         public Settings()
         {
             this.InitializeComponent();
@@ -36,6 +37,43 @@ namespace FixerEditor
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Settings";
+
+            RBCC.IsChecked = false;
+            RBCB.IsChecked = false;
+            RBCG.IsChecked = false;
+            RBCR.IsChecked = false;
+            RBCY.IsChecked = false;
+
+            switch (AppColor)
+            {
+                case 1:
+                    RBCC.IsChecked = true;
+                    break;
+
+                case 2:
+                    RBCB.IsChecked = true;
+                    break;
+
+                case 3:
+                    RBCR.IsChecked = true;
+                    break;
+
+                case 4:
+                    RBCG.IsChecked = true;
+                    break;
+
+                case 5:
+                    RBCY.IsChecked = true;
+                    break;
+            }
+
+            RBTL.IsChecked = false;
+            RBTD.IsChecked = false;
+
+            if (Theme == 1)
+                RBTL.IsChecked = true;
+            else
+                RBTD.IsChecked = true;
 
             SetTheme();
         }
@@ -50,6 +88,7 @@ namespace FixerEditor
                     frameworkElement.RequestedTheme = Windows.UI.Xaml.ElementTheme.Light;
                 }
                 SetTheme();
+                Refreshcolors.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -63,6 +102,7 @@ namespace FixerEditor
                     frameworkElement.RequestedTheme = Windows.UI.Xaml.ElementTheme.Dark;
                 }
                 SetTheme();
+                Refreshcolors.Visibility = Visibility.Collapsed;
 
             }
         }
@@ -133,7 +173,7 @@ namespace FixerEditor
 
         private void SystemThemeRB(object sender, RoutedEventArgs e)
         {
-            if (RBTS.IsChecked == true)
+            /*if (RBTS.IsChecked == true)
             {
                 Theme = 0;
                 if (Window.Current.Content is FrameworkElement frameworkElement)
@@ -141,7 +181,43 @@ namespace FixerEditor
                     frameworkElement.RequestedTheme = Windows.UI.Xaml.ElementTheme.Default;
                 }
                 SetTheme();
+            }*/
+        }
+
+        private void ChangeAppColor(object sender, RoutedEventArgs e)
+        {
+            if (RBCC.IsChecked == true)
+            {
+                if (App.Current.RequestedTheme == ApplicationTheme.Light)
+                    Application.Current.Resources["SystemAccentColor"] = Colors.Black;
+                else
+                    Application.Current.Resources["SystemAccentColor"] = Colors.White;
+                AppColor = 1;
             }
+
+            if (RBCB.IsChecked == true)
+                Application.Current.Resources["SystemAccentColor"] = Color.FromArgb(255, 0, 120, 215);
+                AppColor = 2;
+
+            if (RBCR.IsChecked == true)
+                Application.Current.Resources["SystemAccentColor"] = Colors.Red;
+                AppColor = 3;
+
+            if (RBCG.IsChecked == true)
+                Application.Current.Resources["SystemAccentColor"] = Colors.Green;
+                AppColor = 4;
+
+            if (RBCY.IsChecked == true)
+                Application.Current.Resources["SystemAccentColor"] = Colors.Yellow;
+                AppColor = 5;
+
+            Refreshcolors.Visibility = Visibility.Visible;
+        }
+
+        private void RefreshColors(object sender, RoutedEventArgs e)
+        {
+            Refreshcolors.Visibility = Visibility.Collapsed;
+            Frame.Navigate(typeof(Settings));
         }
     }
 }
