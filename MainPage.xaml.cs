@@ -47,6 +47,11 @@ namespace FixerEditor
 
         }
 
+        /// <summary>
+        /// Creating new project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNew(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditFile));
@@ -77,6 +82,9 @@ namespace FixerEditor
 
         }
 
+        /// <summary>
+        /// Loads projects
+        /// </summary>
         void LoadProjects()
         {
             Windows.Storage.ApplicationDataContainer localProjects = Windows.Storage.ApplicationData.Current.LocalSettings;

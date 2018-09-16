@@ -58,6 +58,7 @@ namespace FixerEditor
                 {
                     int pointerend = editor.Document.Selection.EndPosition;
 
+                    // Coloring syntax
                     SaveAction();
                     Fix();
                     Check();
@@ -66,6 +67,7 @@ namespace FixerEditor
                     var range1 = editor.Document.GetRange(pointerend, pointerend);
                     textchanged = false;
                 }
+                // Undo/Redo options UI
                 #region Redo and Undo
                 if (ActionNavigation !=0)
                 {
@@ -88,6 +90,9 @@ namespace FixerEditor
             }
         }
 
+        /// <summary>
+        /// Color syntax
+        /// </summary>
         void Check()
         {
             string docText;
@@ -136,6 +141,9 @@ namespace FixerEditor
             }
         }
 
+        /// <summary>
+        /// Fix text bugs
+        /// </summary>
         void Fix()
         {
             string docText;
@@ -146,11 +154,21 @@ namespace FixerEditor
             range.CharacterFormat.Bold = Windows.UI.Text.FormatEffect.Off;
         }
 
+        /// <summary>
+        /// Back to home
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
         }
 
+        /// <summary>
+        /// Saves text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SaveButton(object sender, RoutedEventArgs e)
         {
             Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
@@ -191,6 +209,11 @@ namespace FixerEditor
             }
         }
         
+        /// <summary>
+        /// Import of text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OpenButton(object sender, RoutedEventArgs e)
         {
             Windows.Storage.Pickers.FileOpenPicker open =
@@ -233,6 +256,11 @@ namespace FixerEditor
             }
         }
 
+        /// <summary>
+        /// Undo button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UndoButton(object sender, RoutedEventArgs e)
         {
             textsaving = true;
@@ -243,7 +271,12 @@ namespace FixerEditor
 
 
         }
-
+        
+        /// <summary>
+        /// Redo button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RedoButton(object sender, RoutedEventArgs e)
         {
             textsaving = true;
@@ -253,6 +286,9 @@ namespace FixerEditor
             textsaving = false;
         }
 
+        /// <summary>
+        /// Saves actions for Undo/Redo
+        /// </summary>
         void SaveAction()
         {
             textsaving = true;
@@ -282,6 +318,9 @@ namespace FixerEditor
             textsaving = false;
         }
 
+        /// <summary>
+        /// Line counter
+        /// </summary>
         void LineCount()
         {
             string linecout = "";
@@ -306,6 +345,9 @@ namespace FixerEditor
 
         }
 
+        /// <summary>
+        /// Fixs theme bugs
+        /// </summary>
         void SetTheme()
         {
             Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();

@@ -38,6 +38,7 @@ namespace FixerEditor
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Settings";
 
+            
             RBCC.IsChecked = false;
             RBCB.IsChecked = false;
             RBCG.IsChecked = false;
@@ -78,6 +79,11 @@ namespace FixerEditor
             SetTheme();
         }
 
+        /// <summary>
+        /// When Radio Button "Light theme" was clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LightThemeRB(object sender, RoutedEventArgs e)
         {
             if (RBTL.IsChecked == true)
@@ -92,6 +98,11 @@ namespace FixerEditor
             }
         }
 
+        /// <summary>
+        /// When RadioButton "Dark Theme" was clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DarkThemeRB(object sender, RoutedEventArgs e)
         {
             if (RBTD.IsChecked == true)
@@ -112,11 +123,19 @@ namespace FixerEditor
             Theme = 0;
         }
 
+        /// <summary>
+        /// Back to home button is clickied
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
         }
 
+        /// <summary>
+        /// Fixs theme bugs in app
+        /// </summary>
         public void SetTheme()
         {
             Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
@@ -163,6 +182,11 @@ namespace FixerEditor
             header.Fill = myBrush;
         }
 
+        /// <summary>
+        /// Changs TitleBar color to fix theme bug
+        /// </summary>
+        /// <param name="buttoncolor"></param>
+        /// <param name="backcolor"></param>
         void TitleBarColor(Color buttoncolor, Color backcolor)
         {
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -184,6 +208,7 @@ namespace FixerEditor
             }*/
         }
 
+        
         private void ChangeAppColor(object sender, RoutedEventArgs e)
         {
             if (RBCC.IsChecked == true)
@@ -214,6 +239,11 @@ namespace FixerEditor
             Refreshcolors.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Refreshs colors
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RefreshColors(object sender, RoutedEventArgs e)
         {
             Refreshcolors.Visibility = Visibility.Collapsed;
