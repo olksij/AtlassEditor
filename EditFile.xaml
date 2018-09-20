@@ -15,7 +15,7 @@
                 <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
             </Rectangle.Fill>
         </Rectangle>
-        <CommandBar Width="48" Height="48" HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}">
+        <CommandBar Width="48" Height="48" HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}" FocusVisualPrimaryThickness="0,0,0,0">
             <AppBarButton Label="Options" Icon="Setting"/>
         </CommandBar>
         <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="0,32,0,0">
@@ -45,7 +45,7 @@
             Canvas.ZIndex="1"/>
         <ScrollViewer Margin="0,80,0,0">
             <Grid>
-                <RichEditBox x:Name="editor" Margin="28,5,0,0" BorderBrush="{x:Null}" SelectionHighlightColor="#00000000" TextChanging="TextChanged" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Background="{x:Null}" BorderThickness="0,0,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Top"/>
+                <RichEditBox x:Name="editor" Margin="28,5,0,0" BorderBrush="{x:Null}" SelectionHighlightColor="#00000000" TextChanging="TextChanged" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Background="{x:Null}" BorderThickness="0,0,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Top" Padding="10,500,6,5"/>
                 <TextBlock x:Name="linecounter" Text="1" Margin="8,9,0,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="18" FontSize="15"/>
             </Grid>
         </ScrollViewer>
