@@ -22,7 +22,6 @@
             </Rectangle>
             <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Width="48" Background="{x:Null}">
                 <AppBarButton Icon="Add" Label="Create new project" Click="AddNew" />
-                <AppBarButton Icon="Cancel" Label="Clear my projects"/>
                 <AppBarButton Icon="Setting" Label="Settings" Click="OpenSettings" />
             </CommandBar>
         </Grid>
