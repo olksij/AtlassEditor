@@ -20,6 +20,7 @@ namespace FixerEditor
     public enum CreateFileResult
     {
         TextFile,
+        HtmlFile,
         CreateFailed
     }
 
@@ -41,6 +42,11 @@ namespace FixerEditor
                 if (FileType.SelectedIndex == 0)
                 {
                     Result = CreateFileResult.TextFile;
+                }
+
+                if (FileType.SelectedIndex == 1)
+                {
+                    Result = CreateFileResult.HtmlFile;
                 }
 
                 NewFileName = FileName.Text;

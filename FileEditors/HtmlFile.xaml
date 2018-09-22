@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="FixerEditor.HtmlFile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FixerEditor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid x:Name="MainGrid">
+        <Rectangle x:Name="header" Height="80" VerticalAlignment="Top" Margin="0,0,0,0">
+            <Rectangle.Fill>
+                <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <CommandBar Width="48" Height="48" HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}" FocusVisualPrimaryThickness="0,0,0,0">
+            <AppBarButton Label="Options" Icon="Setting" Click="AppBarButton_Click"/>
+        </CommandBar>
+        <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="0,32,0,0">
+            <AppBarButton.Icon>
+                <SymbolIcon Symbol="Home"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="58,32,0,0">
+            <AppBarButton.Icon>
+                <FontIcon Glyph="&#xE7A7;" FontSize="17"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="106,32,0,0" Foreground="Black">
+            <AppBarButton.Icon>
+                <FontIcon Glyph="&#xE7A6;" FontSize="17"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarButton Click="SaveButton" ToolTipService.ToolTip="Save File" Margin="164,32,0,0" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" RenderTransformOrigin="-18.062,0.49" VerticalAlignment="Top">
+            <AppBarButton.Icon>
+                <FontIcon Glyph="&#xE74E;" FontSize="17"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <TextBlock x:Name="AppTitle"
+            xmlns:appmodel="using:Windows.ApplicationModel"
+            Style="{StaticResource CaptionTextBlockStyle}"
+            IsHitTestVisible="False"
+            Canvas.ZIndex="1"/>
+        <ScrollViewer Margin="0,80,0,0">
+            <Grid>
+                <RichEditBox x:Name="editor" Margin="28,5,0,0" BorderBrush="{x:Null}" SelectionHighlightColor="#00000000" TextChanging="TextChanged" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Background="{x:Null}" BorderThickness="0,0,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Top" Padding="10,0,6,1000"/>
+                <TextBlock x:Name="linecounter" Text="1" Margin="8,9,0,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="18" FontSize="15"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

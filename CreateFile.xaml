@@ -17,6 +17,7 @@
         <ComboBox x:Name="FileType" Margin="0,80,0,0" Header="File type" SelectedIndex="0" HorizontalAlignment="Stretch">
             <ComboBox.Items>
                 <ComboBoxItem Content=".txt"/>
+                <ComboBoxItem Content=".html"/>
             </ComboBox.Items>
         </ComboBox>
     </Grid>
