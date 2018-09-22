@@ -54,9 +54,19 @@ namespace FixerEditor
         /// <param name="e"></param>
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(EditFile));
+            CreateNewFile();
         }
 
+        async void CreateNewFile()
+        {
+            CreateFile CreateFileDialog = new CreateFile();
+            await CreateFileDialog.ShowAsync();
+
+            if (CreateFileDialog.Result == CreateFileResult.TextFile)
+            {
+                Frame.Navigate(typeof(EditFile));
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 

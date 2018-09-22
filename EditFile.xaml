@@ -45,7 +45,7 @@
             Canvas.ZIndex="1"/>
         <ScrollViewer Margin="0,80,0,0">
             <Grid>
-                <RichEditBox x:Name="editor" Margin="28,5,0,0" BorderBrush="{x:Null}" SelectionHighlightColor="#00000000" TextChanging="TextChanged" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Background="{x:Null}" BorderThickness="0,0,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Top" Padding="10,500,6,5"/>
+                <RichEditBox x:Name="editor" Margin="28,5,0,0" BorderBrush="{x:Null}" SelectionHighlightColor="#00000000" TextChanging="TextChanged" FocusVisualPrimaryBrush="{x:Null}" FocusVisualSecondaryBrush="{x:Null}" Background="{x:Null}" BorderThickness="0,0,0,0" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Top" Padding="10,0,6,1000"/>
                 <TextBlock x:Name="linecounter" Text="1" Margin="8,9,0,0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="18" FontSize="15"/>
             </Grid>
         </ScrollViewer>

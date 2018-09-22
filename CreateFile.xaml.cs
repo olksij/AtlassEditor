@@ -13,18 +13,46 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FixerEditor
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class CreateFile : Page
+    public enum CreateFileResult
     {
+        TextFile,
+        CreateFailed
+    }
+
+    public sealed partial class CreateFile : ContentDialog
+    {
+        public static string NewFileName = "";
+
+        public CreateFileResult Result { get; private set; }
+
         public CreateFile()
         {
             this.InitializeComponent();
+        }
+
+        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (FileName.Text != "")
+            {
+                if (FileType.SelectedIndex == 0)
+                {
+                    Result = CreateFileResult.TextFile;
+                }
+
+                NewFileName = FileName.Text;
+            }
+            else
+            {
+                Result = CreateFileResult.CreateFailed;
+            }
+        }
+
+        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
         }
     }
 }

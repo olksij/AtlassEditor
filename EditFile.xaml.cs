@@ -42,11 +42,12 @@ namespace FixerEditor
             var full = (ApplicationView.GetForCurrentView().IsFullScreenMode);
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
-            AppTitle.Text = "New File";
+            AppTitle.Text = CreateFile.NewFileName;
 
             SetTheme();
 
             Work();
+
         }
 
         async void Work()
@@ -60,13 +61,15 @@ namespace FixerEditor
 
                     // Coloring syntax
                     SaveAction();
-                    Fix();
-                    Check();
+                    //Fix();
+                    //Check();
                     LineCount();
 
                     var range1 = editor.Document.GetRange(pointerend, pointerend);
                     textchanged = false;
                 }
+                Windows.UI.Xaml.Thickness Padding = new Thickness(10, 0, 6, MainGrid.ActualHeight - 95);
+                editor.Padding = Padding;
                 // Undo/Redo options UI
                 #region Redo and Undo
                 if (ActionNavigation !=0)
@@ -176,10 +179,9 @@ namespace FixerEditor
 
             // Dropdown of file types the user can save the file as
             savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
-            savePicker.FileTypeChoices.Add("C Sharp code", new List<string>() { ".cs" });
 
             // Default file name if the user does not type one in or select a file to replace
-            savePicker.SuggestedFileName = "New File";
+            savePicker.SuggestedFileName = CreateFile.NewFileName;
 
             Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
             if (file != null)
