@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="501e95cf-3f51-4b0c-b202-b1f9a1d46ba8" Publisher="CN=Flexo  Team" Version="0.2.5.0" />
+  <Identity Name="FixerEditor" Publisher="CN=AlexBesida" Version="0.3.6.0" />
   <mp:PhoneIdentity PhoneProductId="501e95cf-3f51-4b0c-b202-b1f9a1d46ba8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Fixer Editor</DisplayName>
-    <PublisherDisplayName>Flexo Team</PublisherDisplayName>
+    <PublisherDisplayName>Alex Besida</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
