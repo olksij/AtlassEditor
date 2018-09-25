@@ -59,6 +59,7 @@ namespace FixerEditor
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            Result = CreateFileResult.CreateFailed;
         }
     }
 }
