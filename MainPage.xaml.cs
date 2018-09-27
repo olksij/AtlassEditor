@@ -86,10 +86,6 @@ namespace FixerEditor
 
         }
 
-        private void new_project_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(CreateFile));
-        }
 
         private void TextBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
         {

@@ -167,6 +167,7 @@ namespace FixerEditor
             Frame.Navigate(typeof(MainPage));
         }
 
+
         /// <summary>
         /// Saves text
         /// </summary>
