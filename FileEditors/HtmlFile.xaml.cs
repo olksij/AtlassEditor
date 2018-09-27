@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using FixerEditor;
+using Windows.UI.Core;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,6 +35,7 @@ namespace FixerEditor
 
         public bool textchanged = false;
         public bool textsaving = false;
+        public Windows.Storage.StorageFile WorkFile = null;
 
         public HtmlFile()
         {
@@ -185,7 +187,8 @@ namespace FixerEditor
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
 
             // Dropdown of file types the user can save the file as
-            savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
+            savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".html" });
+
 
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = CreateFile.NewFileName;
@@ -214,10 +217,45 @@ namespace FixerEditor
                 else
                 {
                     AppTitle.Text = file.Name;
+                    WorkFile = file;
                 }
+                WorkFile = file;
             }
         }
-        
+
+        async void SaveButtonAction()
+        {
+            Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
+            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+
+            savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".html" });
+
+            savePicker.SuggestedFileName = CreateFile.NewFileName;
+
+            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                Windows.Storage.CachedFileManager.DeferUpdates(file);
+                Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+
+                editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
+
+                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+                if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
+                {
+                    Windows.UI.Popups.MessageDialog errorBox =
+                        new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
+                    await errorBox.ShowAsync();
+                }
+                else
+                {
+                    AppTitle.Text = file.Name;
+                }
+                WorkFile = file;
+            }
+        }
+
         /// <summary>
         /// Import of text
         /// </summary>
@@ -351,7 +389,89 @@ namespace FixerEditor
 
         private void PlayButton(object sender, RoutedEventArgs e)
         {
+            if (WorkFile != null)
+            {
+                AutoSave();
+            }
 
+            else
+            {
+                SaveButtonAction();
+                AutoSave();
+            }
+
+            RunFileWindow();
+        }
+
+        async void RunFileBrowser()
+        {
+            var file = WorkFile;
+
+            if (file != null)
+            {
+                // Launch the retrieved file
+                var success = await Windows.System.Launcher.LaunchFileAsync(file);
+
+                if (success)
+                {
+                    
+                }
+                else
+                {
+                    Windows.UI.Popups.MessageDialog errorBox = new Windows.UI.Popups.MessageDialog("An error happened");
+                    await errorBox.ShowAsync();
+                }
+            }
+            else
+            {
+                Windows.UI.Popups.MessageDialog errorBox =
+                    new Windows.UI.Popups.MessageDialog("An error happened");
+                await errorBox.ShowAsync();
+            }
+
+        }
+
+        async void RunFileWindow()
+        {
+            CoreApplicationView newView = CoreApplication.CreateNewView();
+            int newViewId = 0;
+            await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Frame frame = new Frame();
+                frame.Navigate(typeof(MainPage));
+                Window.Current.Content = frame;
+                // You have to activate the window in order to show it later.
+                Window.Current.Activate();
+
+                newViewId = ApplicationView.GetForCurrentView().Id;
+            });
+            bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
+        }
+
+        async void AutoSave()
+        {
+            // Prevent updates to the remote version of the file until we
+            // finish making changes and call CompleteUpdatesAsync.
+            Windows.Storage.CachedFileManager.DeferUpdates(WorkFile);
+            // write to file
+            Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                await WorkFile.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+
+            editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
+
+            // Let Windows know that we're finished changing the file so the
+            // other app can update the remote version of the file.
+            Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(WorkFile);
+            if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
+            {
+                Windows.UI.Popups.MessageDialog errorBox =
+                    new Windows.UI.Popups.MessageDialog("An error happened");
+                await errorBox.ShowAsync();
+            }
+            else
+            {
+                AppTitle.Text = WorkFile.Name;
+            }
         }
 
         /// <summary>

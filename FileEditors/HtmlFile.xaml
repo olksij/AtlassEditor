@@ -28,6 +28,11 @@
                 <FontIcon Glyph="&#xE7A7;" FontSize="17"/>
             </AppBarButton.Icon>
         </AppBarButton>
+        <AppBarButton x:Name="PlayFile" Click="PlayButton" ToolTipService.ToolTip="Run the file" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="212,32,0,0">
+            <AppBarButton.Icon>
+                <SymbolIcon Symbol="Play"/>
+            </AppBarButton.Icon>
+        </AppBarButton>
         <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="106,32,0,0" Foreground="Black">
             <AppBarButton.Icon>
                 <FontIcon Glyph="&#xE7A6;" FontSize="17"/>
