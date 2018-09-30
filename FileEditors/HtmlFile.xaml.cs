@@ -51,7 +51,14 @@ namespace FixerEditor
             SetTheme();
 
             Work();
-
+            if (pv.FileTypeEdit == FileTypes.TextFile)
+            {
+                PlayFile.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PlayFile.Visibility = Visibility.Visible;
+            }
         }
 
         #region Loop editor work
@@ -66,8 +73,11 @@ namespace FixerEditor
 
                     // Coloring syntax
                     SaveAction();
-                    Fix();
-                    Check();
+                    if (pv.FileTypeEdit == FileTypes.HtmlFile)
+                    {
+                        Fix();
+                        Check();
+                    }
                     LineCount();
 
                     var range1 = editor.Document.GetRange(pointerend, pointerend);
@@ -509,7 +519,6 @@ namespace FixerEditor
             Working = false;
             await Task.Delay(50);
 
-            pv.FileTypeEdit = pv.FileTypes.HtmlFile;
             pv.FileNameEdit = File.DisplayName;
             FileSettings FileOptionsDialog = new FileSettings();
             await FileOptionsDialog.ShowAsync();

@@ -64,12 +64,14 @@ namespace FixerEditor
 
             if (CreateFileDialog.Result == CreateFileResult.TextFile)
             {
-                Frame.Navigate(typeof(TextFile));
+                pv.FileTypeEdit = FileTypes.TextFile;
             }
             if (CreateFileDialog.Result == CreateFileResult.HtmlFile)
             {
-                Frame.Navigate(typeof(HtmlFile));
+                pv.FileTypeEdit = FileTypes.HtmlFile;
             }
+
+            Frame.Navigate(typeof(HtmlFile));
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

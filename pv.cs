@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace FixerEditor
 {
+    public enum FileTypes
+    {
+        TextFile,
+        HtmlFile
+    }
+
     class pv
     {
-        public enum FileTypes
-        {
-            TextFile,
-            HtmlFile
-        }
-
         public static FileTypes FileTypeEdit;
         public static string FileNameEdit;
     }
