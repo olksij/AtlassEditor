@@ -36,6 +36,7 @@ namespace FixerEditor
         public bool textchanged = false;
         public bool textsaving = false;
         public Windows.Storage.StorageFile WorkFile = null;
+        public bool Working = true;
 
         public HtmlFile()
         {
@@ -54,7 +55,7 @@ namespace FixerEditor
 
         async void Work()
         {
-            while (true)
+            while (Working)
             {
                 await Task.Delay(10);
                 if (textchanged == true)
@@ -166,21 +167,13 @@ namespace FixerEditor
             range.CharacterFormat.Bold = Windows.UI.Text.FormatEffect.Off;
         }
 
-        /// <summary>
-        /// Back to home
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BackButton(object sender, RoutedEventArgs e)
+        private async void BackButton(object sender, RoutedEventArgs e)
         {
+            Working = false;
+            await Task.Delay(50);
             Frame.Navigate(typeof(MainPage));
         }
 
-        /// <summary>
-        /// Saves text
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void SaveButton(object sender, RoutedEventArgs e)
         {
             Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
@@ -387,20 +380,23 @@ namespace FixerEditor
             linecounter.Text = linecout;
         }
 
-        private void PlayButton(object sender, RoutedEventArgs e)
+        private async void PlayButton(object sender, RoutedEventArgs e)
         {
-            if (WorkFile != null)
-            {
-                AutoSave();
-            }
+            Working = false;
+            await Task.Delay(50);
 
-            else
+            if (WorkFile == null)
             {
                 SaveButtonAction();
                 AutoSave();
             }
 
-            RunFileWindow();
+            else
+            {
+                AutoSave();
+            }
+
+            //RunFileBrowser();
         }
 
         async void RunFileBrowser()
@@ -450,28 +446,8 @@ namespace FixerEditor
 
         async void AutoSave()
         {
-            // Prevent updates to the remote version of the file until we
-            // finish making changes and call CompleteUpdatesAsync.
-            Windows.Storage.CachedFileManager.DeferUpdates(WorkFile);
-            // write to file
-            Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                await WorkFile.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
-
-            editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
-
-            // Let Windows know that we're finished changing the file so the
-            // other app can update the remote version of the file.
-            Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(WorkFile);
-            if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
-            {
-                Windows.UI.Popups.MessageDialog errorBox =
-                    new Windows.UI.Popups.MessageDialog("An error happened");
-                await errorBox.ShowAsync();
-            }
-            else
-            {
-                AppTitle.Text = WorkFile.Name;
-            }
+            editor.Document.GetText(TextGetOptions.None, out string docText);
+            await Windows.Storage.FileIO.WriteTextAsync(WorkFile, docText);
         }
 
         /// <summary>

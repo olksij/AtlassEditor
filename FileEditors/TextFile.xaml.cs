@@ -34,6 +34,7 @@ namespace FixerEditor
 
         public bool textchanged = false;
         public bool textsaving = false;
+        public bool Working = true;
 
         public TextFile()
         {
@@ -52,7 +53,7 @@ namespace FixerEditor
 
         async void Work()
         {
-            while (true)
+            while (Working)
             {
                 await Task.Delay(10);
                 if (textchanged == true)
@@ -162,8 +163,10 @@ namespace FixerEditor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BackButton(object sender, RoutedEventArgs e)
+        private async void BackButton(object sender, RoutedEventArgs e)
         {
+            Working = false;
+            await Task.Delay(50);
             Frame.Navigate(typeof(MainPage));
         }
 
