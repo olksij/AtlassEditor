@@ -15,6 +15,7 @@ using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using FixerEditor;
 using Windows.UI.Core;
+using FixerEditor.FileEditors;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -503,8 +504,15 @@ namespace FixerEditor
         }
         #endregion
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            Working = false;
+            await Task.Delay(50);
+
+            pv.FileTypeEdit = pv.FileTypes.HtmlFile;
+            pv.FileNameEdit = File.DisplayName;
+            FileSettings FileOptionsDialog = new FileSettings();
+            await FileOptionsDialog.ShowAsync();
         }
 
     }

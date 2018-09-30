@@ -432,8 +432,16 @@ namespace FixerEditor
             }
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            Working = false;
+            await Task.Delay(50);
+
+            pv.FileTypeEdit = pv.FileTypes.HtmlFile;
+            pv.FileNameEdit = File.DisplayName;
+            FileSettings FileOptionsDialog = new FileSettings();
+            await FileOptionsDialog.ShowAsync();
+
         }
     }
 }

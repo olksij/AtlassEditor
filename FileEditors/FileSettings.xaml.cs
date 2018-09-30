@@ -17,11 +17,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace FixerEditor.FileEditors
 {
-    public sealed partial class FileOptions : ContentDialog
+    public sealed partial class FileSettings : ContentDialog
     {
-        public FileOptions()
+        public FileSettings()
         {
             this.InitializeComponent();
+
+            FileName.Text = pv.FileNameEdit;
+            if (pv.FileTypeEdit == pv.FileTypes.HtmlFile)
+                FileType.SelectedIndex = 1;
+            else
+                FileType.SelectedIndex = 0;
+
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

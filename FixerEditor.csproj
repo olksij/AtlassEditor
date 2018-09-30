@@ -105,8 +105,8 @@
     <Compile Include="CreateFile.xaml.cs">
       <DependentUpon>CreateFile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileEditors\FileOptions.xaml.cs">
-      <DependentUpon>FileOptions.xaml</DependentUpon>
+    <Compile Include="FileEditors\FileSettings.xaml.cs">
+      <DependentUpon>FileSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="FileEditors\HtmlFile.xaml.cs">
       <DependentUpon>HtmlFile.xaml</DependentUpon>
@@ -118,6 +118,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="pv.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -186,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FileEditors\FileOptions.xaml">
+    <Page Include="FileEditors\FileSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
