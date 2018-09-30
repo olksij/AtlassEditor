@@ -1,24 +1,26 @@
-﻿<Page
+﻿<ContentDialog
     x:Class="FixerEditor.FileEditors.FileOptions"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FixerEditor.FileEditors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Title="File Options"
+    PrimaryButtonText="Contine"
+    SecondaryButtonText="Cancel"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
-    <Grid>
-        <Rectangle x:Name="header" Height="80" VerticalAlignment="Top">
-            <Rectangle.Fill>
-                <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
-            </Rectangle.Fill>
-        </Rectangle>
-        <AppBarButton Width="48" Height="48" Margin="0,32,0,0" Click="BackButtonClick">
-            <SymbolIcon Symbol="Back"/>
-        </AppBarButton>
-        <TextBlock x:Name="AppTitle"
-            xmlns:appmodel="using:Windows.ApplicationModel" Style="{StaticResource CaptionTextBlockStyle}" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Stretch"/>
-        <TextBlock Text="File Configuration" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,40,0,0" Style="{StaticResource TitleTextBlockStyle}"/>
+    <Grid MinWidth="300">
+        <TextBox x:Name="FileName"  Header="Filename" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="File Name"/>
+        <ComboBox x:Name="FileType" Margin="0,80,0,0" Header="File type" SelectedIndex="0" HorizontalAlignment="Stretch">
+            <ComboBox.Items>
+                <ComboBoxItem Content=".txt"/>
+                <ComboBoxItem Content=".html"/>
+            </ComboBox.Items>
+        </ComboBox>
+        <CheckBox Content="Apply changes later" Margin="0,150,0,0"/>
 
     </Grid>
-</Page>
+</ContentDialog>

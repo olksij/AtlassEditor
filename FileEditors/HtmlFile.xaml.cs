@@ -35,7 +35,7 @@ namespace FixerEditor
 
         public bool textchanged = false;
         public bool textsaving = false;
-        public Windows.Storage.StorageFile WorkFile = null;
+        public Windows.Storage.StorageFile File = null;
         public bool Working = true;
 
         public HtmlFile()
@@ -53,6 +53,7 @@ namespace FixerEditor
 
         }
 
+        #region Loop editor work
         async void Work()
         {
             while (Working)
@@ -96,9 +97,6 @@ namespace FixerEditor
             }
         }
 
-        /// <summary>
-        /// Color syntax
-        /// </summary>
         void Check()
         {
             string docText;
@@ -147,9 +145,6 @@ namespace FixerEditor
             }
         }
 
-        /// <summary>
-        /// Fix text bugs
-        /// </summary>
         void Fix()
         {
             string docText;
@@ -167,13 +162,76 @@ namespace FixerEditor
             range.CharacterFormat.Bold = Windows.UI.Text.FormatEffect.Off;
         }
 
-        private async void BackButton(object sender, RoutedEventArgs e)
+        private void UndoButton(object sender, RoutedEventArgs e)
         {
-            Working = false;
-            await Task.Delay(50);
-            Frame.Navigate(typeof(MainPage));
+            textsaving = true;
+            ActionNavigation -= 1;
+            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
+            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
+            textsaving = false;
+
+
         }
 
+        private void RedoButton(object sender, RoutedEventArgs e)
+        {
+            textsaving = true;
+            ActionNavigation += 1;
+            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
+            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
+            textsaving = false;
+        }
+
+        void SaveAction()
+        {
+            textsaving = true;
+
+            string Text;
+            editor.Document.GetText(Windows.UI.Text.TextGetOptions.None, out Text);
+            if (TextActions.Count - 1 > ActionNavigation)
+            {
+                while (TextActions.Count - 1 > ActionNavigation)
+                {
+                    TextActions.RemoveAt(TextActions.Count - 1);
+                }
+            }
+            TextActions.Add(Text);
+
+            int pointerend = editor.Document.Selection.EndPosition;
+            if (PointerActions.Count - 1 > ActionNavigation)
+            {
+                while (PointerActions.Count - 1 > ActionNavigation)
+                {
+                    PointerActions.RemoveAt(PointerActions.Count - 1);
+                }
+            }
+            PointerActions.Add(pointerend);
+
+            ActionNavigation += 1;
+            textsaving = false;
+        }
+
+        void LineCount()
+        {
+            string linecout = "";
+            editor.Document.GetText(Windows.UI.Text.TextGetOptions.None, out string docText);
+            var range = editor.Document.GetRange(0, docText.Length);
+
+            docText = Regex.Replace(docText, @"\t|\n|\r", ";");
+            int count = docText.Split(';').Length;
+
+            for (int i = 1; i < count; i++)
+            {
+                linecout = linecout + i.ToString() + "\n";
+            }
+
+            Random r = new Random();
+
+            linecounter.Text = linecout;
+        }
+        #endregion
+
+        #region Save
         private async void SaveButton(object sender, RoutedEventArgs e)
         {
             Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
@@ -186,33 +244,31 @@ namespace FixerEditor
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = CreateFile.NewFileName;
 
-            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file != null)
+            Windows.Storage.StorageFile File = await savePicker.PickSaveFileAsync();
+            if (File != null)
             {
                 // Prevent updates to the remote version of the file until we
                 // finish making changes and call CompleteUpdatesAsync.
-                Windows.Storage.CachedFileManager.DeferUpdates(file);
+                Windows.Storage.CachedFileManager.DeferUpdates(File);
                 // write to file
                 Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                    await File.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
 
                 editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
 
                 // Let Windows know that we're finished changing the file so the
                 // other app can update the remote version of the file.
-                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(File);
                 if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
                 {
                     Windows.UI.Popups.MessageDialog errorBox =
-                        new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
+                        new Windows.UI.Popups.MessageDialog("File " + File.Name + " couldn't be saved.");
                     await errorBox.ShowAsync();
                 }
                 else
                 {
-                    AppTitle.Text = file.Name;
-                    WorkFile = file;
+                    AppTitle.Text = File.Name;
                 }
-                WorkFile = file;
             }
         }
 
@@ -225,35 +281,29 @@ namespace FixerEditor
 
             savePicker.SuggestedFileName = CreateFile.NewFileName;
 
-            Windows.Storage.StorageFile file = await savePicker.PickSaveFileAsync();
-            if (file != null)
+            File = await savePicker.PickSaveFileAsync();
+            if (File != null)
             {
-                Windows.Storage.CachedFileManager.DeferUpdates(file);
+                Windows.Storage.CachedFileManager.DeferUpdates(File);
                 Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                    await File.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
 
                 editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
 
-                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(file);
+                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(File);
                 if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
                 {
                     Windows.UI.Popups.MessageDialog errorBox =
-                        new Windows.UI.Popups.MessageDialog("File " + file.Name + " couldn't be saved.");
+                        new Windows.UI.Popups.MessageDialog("File " + File.Name + " couldn't be saved.");
                     await errorBox.ShowAsync();
                 }
                 else
                 {
-                    AppTitle.Text = file.Name;
+                    AppTitle.Text = File.Name;
                 }
-                WorkFile = file;
             }
         }
 
-        /// <summary>
-        /// Import of text
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void OpenButton(object sender, RoutedEventArgs e)
         {
             Windows.Storage.Pickers.FileOpenPicker open =
@@ -262,17 +312,17 @@ namespace FixerEditor
                 Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             open.FileTypeFilter.Add(".txt");
 
-            Windows.Storage.StorageFile file = await open.PickSingleFileAsync();
+            Windows.Storage.StorageFile File = await open.PickSingleFileAsync();
 
-            if (file != null)
+            if (File != null)
             {
                 try
                 {
-                    Windows.Storage.Streams.IRandomAccessStream randAccStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                    Windows.Storage.Streams.IRandomAccessStream randAccStream = await File.OpenAsync(Windows.Storage.FileAccessMode.Read);
 
                     editor.Document.LoadFromStream(Windows.UI.Text.TextSetOptions.None, randAccStream);
 
-                    AppTitle.Text = file.Name;
+                    AppTitle.Text = File.Name;
                 }
                 catch (Exception)
                 {
@@ -295,89 +345,13 @@ namespace FixerEditor
                 textchanged = true;
             }
         }
+        #endregion
 
-        /// <summary>
-        /// Undo button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UndoButton(object sender, RoutedEventArgs e)
+        private async void BackButton(object sender, RoutedEventArgs e)
         {
-            textsaving = true;
-            ActionNavigation -= 1;
-            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
-            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
-            textsaving = false;
-
-
-        }
-        
-        /// <summary>
-        /// Redo button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RedoButton(object sender, RoutedEventArgs e)
-        {
-            textsaving = true;
-            ActionNavigation += 1;
-            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
-            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
-            textsaving = false;
-        }
-
-        /// <summary>
-        /// Saves actions for Undo/Redo
-        /// </summary>
-        void SaveAction()
-        {
-            textsaving = true;
-
-            string Text;
-            editor.Document.GetText(Windows.UI.Text.TextGetOptions.None, out Text);
-            if (TextActions.Count-1 > ActionNavigation)
-            {
-                while (TextActions.Count - 1 > ActionNavigation)
-                {
-                    TextActions.RemoveAt(TextActions.Count-1);
-                }
-            }
-            TextActions.Add(Text);
-
-            int pointerend = editor.Document.Selection.EndPosition;
-            if (PointerActions.Count - 1 > ActionNavigation)
-            {
-                while (PointerActions.Count - 1 > ActionNavigation)
-                {
-                    PointerActions.RemoveAt(PointerActions.Count - 1);
-                }
-            }
-            PointerActions.Add(pointerend);
-
-            ActionNavigation += 1;
-            textsaving = false;
-        }
-
-        /// <summary>
-        /// Line counter
-        /// </summary>
-        void LineCount()
-        {
-            string linecout = "";
-            editor.Document.GetText(Windows.UI.Text.TextGetOptions.None, out string docText);
-            var range = editor.Document.GetRange(0, docText.Length);
-
-            docText = Regex.Replace(docText, @"\t|\n|\r", ";");
-            int count = docText.Split(';').Length;
-
-            for (int i = 1; i<count; i++)
-            {
-                linecout = linecout + i.ToString() + "\n";
-            }
-
-            Random r = new Random();
-
-            linecounter.Text = linecout;
+            Working = false;
+            await Task.Delay(50);
+            Frame.Navigate(typeof(MainPage));
         }
 
         private async void PlayButton(object sender, RoutedEventArgs e)
@@ -385,7 +359,7 @@ namespace FixerEditor
             Working = false;
             await Task.Delay(50);
 
-            if (WorkFile == null)
+            if (File == null)
             {
                 SaveButtonAction();
                 AutoSave();
@@ -401,12 +375,11 @@ namespace FixerEditor
 
         async void RunFileBrowser()
         {
-            var file = WorkFile;
 
-            if (file != null)
+            if (File != null)
             {
                 // Launch the retrieved file
-                var success = await Windows.System.Launcher.LaunchFileAsync(file);
+                var success = await Windows.System.Launcher.LaunchFileAsync(File);
 
                 if (success)
                 {
@@ -447,12 +420,10 @@ namespace FixerEditor
         async void AutoSave()
         {
             editor.Document.GetText(TextGetOptions.None, out string docText);
-            await Windows.Storage.FileIO.WriteTextAsync(WorkFile, docText);
+            await Windows.Storage.FileIO.WriteTextAsync(File, docText);
         }
 
-        /// <summary>
-        /// Fixs theme bugs
-        /// </summary>
+        #region Theme
         void SetTheme()
         {
             Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
@@ -530,11 +501,10 @@ namespace FixerEditor
                 return Settings.Theme;
             }
         }
+        #endregion
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            FileEditors.FileOptions.Type = FileEditors.ConfigureFile.HtmlFile;
-            Frame.Navigate(typeof(FixerEditor.FileEditors.FileOptions));
         }
 
     }

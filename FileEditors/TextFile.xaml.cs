@@ -434,8 +434,6 @@ namespace FixerEditor
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            FileEditors.FileOptions.Type = FileEditors.ConfigureFile.TextFile;
-            Frame.Navigate(typeof(FixerEditor.FileEditors.FileOptions));
         }
     }
 }
