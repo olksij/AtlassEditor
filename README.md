@@ -1,5 +1,4 @@
 ![Fixer-Editor](/docs/images/info-bar.png)
-## by Alex Besida
 
 ### Target platform:
 Universal Windows
