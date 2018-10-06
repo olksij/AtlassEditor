@@ -12,7 +12,7 @@ namespace FixerEditor
         HtmlFile
     }
 
-    class pv
+    class AppVar
     {
         public static FileTypes FileTypeEdit;
         public static string FileNameEdit;

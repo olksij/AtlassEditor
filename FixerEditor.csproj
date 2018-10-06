@@ -105,6 +105,9 @@
     <Compile Include="CreateFile.xaml.cs">
       <DependentUpon>CreateFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FileEditors\EditSettings.xaml.cs">
+      <DependentUpon>EditSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileEditors\FileSettings.xaml.cs">
       <DependentUpon>FileSettings.xaml</DependentUpon>
     </Compile>
@@ -115,7 +118,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pv.cs" />
+    <Compile Include="AppVar.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="CreateFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FileEditors\EditSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -36,7 +36,7 @@ namespace FixerEditor
 
         public bool textchanged = false;
         public bool textsaving = false;
-        public Windows.Storage.StorageFile File = null;
+        public static Windows.Storage.StorageFile File = null;
         public bool Working = true;
 
         public HtmlFile()
@@ -50,8 +50,7 @@ namespace FixerEditor
 
             SetTheme();
 
-            Work();
-            if (pv.FileTypeEdit == FileTypes.TextFile)
+            if (AppVar.FileTypeEdit == FileTypes.TextFile)
             {
                 PlayFile.Visibility = Visibility.Collapsed;
             }
@@ -59,6 +58,8 @@ namespace FixerEditor
             {
                 PlayFile.Visibility = Visibility.Visible;
             }
+
+            Work();
         }
 
         #region Loop editor work
@@ -73,7 +74,7 @@ namespace FixerEditor
 
                     // Coloring syntax
                     SaveAction();
-                    if (pv.FileTypeEdit == FileTypes.HtmlFile)
+                    if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
                     {
                         Fix();
                         Check();
@@ -249,8 +250,10 @@ namespace FixerEditor
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
 
             // Dropdown of file types the user can save the file as
-            savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".html" });
-
+            if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+                savePicker.FileTypeChoices.Add("HTML file", new List<string>() { ".html" });
+            else
+                savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
 
             // Default file name if the user does not type one in or select a file to replace
             savePicker.SuggestedFileName = CreateFile.NewFileName;
@@ -516,12 +519,13 @@ namespace FixerEditor
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            Working = false;
-            await Task.Delay(50);
+            //Working = false;
+            //await Task.Delay(50);
 
-            pv.FileNameEdit = File.DisplayName;
-            FileSettings FileOptionsDialog = new FileSettings();
-            await FileOptionsDialog.ShowAsync();
+            //pv.FileNameEdit = File.Name;
+            //FileSettings FileOptionsDialog = new FileSettings();
+            //await FileOptionsDialog.ShowAsync();
+            Frame.Navigate(typeof(EditSettings));
         }
 
     }

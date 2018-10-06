@@ -50,7 +50,7 @@ namespace FixerEditor
                 }
 
                 NewFileName = FileName.Text;
-                pv.FileNameEdit = FileName.Text;
+                AppVar.FileNameEdit = FileName.Text;
             }
             else
             {

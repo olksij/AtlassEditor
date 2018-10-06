@@ -44,7 +44,6 @@ namespace FixerEditor
             LoadProjects();
 
             SetTheme();
-
         }
 
         /// <summary>
@@ -64,11 +63,11 @@ namespace FixerEditor
 
             if (CreateFileDialog.Result == CreateFileResult.TextFile)
             {
-                pv.FileTypeEdit = FileTypes.TextFile;
+                AppVar.FileTypeEdit = FileTypes.TextFile;
             }
             if (CreateFileDialog.Result == CreateFileResult.HtmlFile)
             {
-                pv.FileTypeEdit = FileTypes.HtmlFile;
+                AppVar.FileTypeEdit = FileTypes.HtmlFile;
             }
 
             Frame.Navigate(typeof(HtmlFile));

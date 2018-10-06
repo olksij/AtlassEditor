@@ -23,11 +23,11 @@ namespace FixerEditor.FileEditors
         {
             this.InitializeComponent();
 
-            FileName.Text = pv.FileNameEdit;
-            if (pv.FileTypeEdit == FileTypes.HtmlFile)
-                FileType.SelectedIndex = 1;
-            else
-                FileType.SelectedIndex = 0;
+            //FileName.Text = pv.FileNameEdit;
+            //if (pv.FileTypeEdit == FileTypes.HtmlFile)
+            //    FileType.SelectedIndex = 1;
+            //else
+            //    FileType.SelectedIndex = 0;
 
         }
 

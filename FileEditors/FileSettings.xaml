@@ -13,14 +13,14 @@
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 
     <Grid MinWidth="300">
-        <TextBox x:Name="FileName"  Header="Filename" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="File Name"/>
+        <!--TextBox x:Name="FileName"  Header="Filename" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="File Name"/>
         <ComboBox x:Name="FileType" Margin="0,80,0,0" Header="File type" SelectedIndex="0" HorizontalAlignment="Stretch">
             <ComboBox.Items>
                 <ComboBoxItem Content=".txt"/>
                 <ComboBoxItem Content=".html"/>
             </ComboBox.Items>
         </ComboBox>
-        <CheckBox Content="Apply changes later" Margin="0,150,0,0"/>
+        <CheckBox Content="Apply changes later" Margin="0,150,0,0"/-->
 
     </Grid>
 </ContentDialog>
