@@ -20,5 +20,6 @@
                 <ComboBoxItem Content=".html"/>
             </ComboBox.Items>
         </ComboBox>
+        <CheckBox x:Name="CheckBoxFileNow" VerticalAlignment="Top" Margin="0,155,0,0" Content="Create new file"/>
     </Grid>
 </ContentDialog>

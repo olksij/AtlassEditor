@@ -26,7 +26,7 @@ namespace FixerEditor
 
     public sealed partial class CreateFile : ContentDialog
     {
-        public static string NewFileName = "";
+        public static bool CreateFileNow;
 
         public CreateFileResult Result { get; private set; }
 
@@ -49,8 +49,11 @@ namespace FixerEditor
                     Result = CreateFileResult.HtmlFile;
                 }
 
-                NewFileName = FileName.Text;
                 AppVar.FileNameEdit = FileName.Text;
+                if (CheckBoxFileNow.IsChecked == true)
+                    CreateFileNow = true;
+                else
+                    CreateFileNow = false;
             }
             else
             {

@@ -16,6 +16,7 @@ using Windows.ApplicationModel.Core;
 using FixerEditor;
 using Windows.UI.Core;
 using FixerEditor.FileEditors;
+using Windows.Storage;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,7 +47,7 @@ namespace FixerEditor
             var full = (ApplicationView.GetForCurrentView().IsFullScreenMode);
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
-            AppTitle.Text = CreateFile.NewFileName;
+            AppTitle.Text = AppVar.FileNameEdit;
 
             SetTheme();
 
@@ -62,9 +63,33 @@ namespace FixerEditor
             Work();
         }
 
+        async void ForceFileSave()
+        {
+            if (CreateFile.CreateFileNow)
+            {
+                string FileTypeString;
+                if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+                {
+                    FileTypeString = ".html";
+                }
+                else
+                {
+                    FileTypeString = ".txt";
+                }
+                //Windows.Storage.StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                //StorageFolder Documents = await Windows.Storage.KnownFolders.PicturesLibrary;
+
+                //File = await Documents.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, CreationCollisionOption.GenerateUniqueName);
+
+            }
+        }
+
         #region Loop editor work
         async void Work()
         {
+            ForceFileSave();
+            CreateFile.CreateFileNow = false;
+
             while (Working)
             {
                 await Task.Delay(10);
@@ -256,7 +281,7 @@ namespace FixerEditor
                 savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
 
             // Default file name if the user does not type one in or select a file to replace
-            savePicker.SuggestedFileName = CreateFile.NewFileName;
+            savePicker.SuggestedFileName = AppVar.FileNameEdit;
 
             Windows.Storage.StorageFile File = await savePicker.PickSaveFileAsync();
             if (File != null)
@@ -293,7 +318,7 @@ namespace FixerEditor
 
             savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".html" });
 
-            savePicker.SuggestedFileName = CreateFile.NewFileName;
+            savePicker.SuggestedFileName = AppVar.FileNameEdit;
 
             File = await savePicker.PickSaveFileAsync();
             if (File != null)

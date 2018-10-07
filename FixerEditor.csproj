@@ -108,9 +108,6 @@
     <Compile Include="FileEditors\EditSettings.xaml.cs">
       <DependentUpon>EditSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileEditors\FileSettings.xaml.cs">
-      <DependentUpon>FileSettings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FileEditors\HtmlFile.xaml.cs">
       <DependentUpon>HtmlFile.xaml</DependentUpon>
     </Compile>
@@ -188,10 +185,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FileEditors\EditSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FileEditors\FileSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

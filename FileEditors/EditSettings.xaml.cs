@@ -40,18 +40,29 @@ namespace FixerEditor.FileEditors
 
         }
 
-        private void BackButton(object sender, RoutedEventArgs e)
+        private async void BackButton(object sender, RoutedEventArgs e)
         {
             AppVar.FileNameEdit = FileName.Text;
-
+            string FileTypeString;
             if (FileType.SelectedIndex == 1)
+            {
                 AppVar.FileTypeEdit = FileTypes.HtmlFile;
+                FileTypeString = ".html";
+            }
             else
+            {
                 AppVar.FileTypeEdit = FileTypes.TextFile;
+                FileTypeString = ".txt";
+            }
 
-
-
+            if (LaterCheckBox.IsChecked == false)
+            {
+                //Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+                //Windows.Storage.StorageFile NewFile = await storageFolder.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, Windows.Storage.CreationCollisionOption.ReplaceExisting);
+                await HtmlFile.File.RenameAsync(AppVar.FileNameEdit + FileTypeString);
+            }
             Frame.Navigate(typeof(HtmlFile));
         }
+        
     }
 }

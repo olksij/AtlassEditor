@@ -28,7 +28,7 @@
                         <ComboBoxItem Content=".html"/>
                     </ComboBox.Items>
                 </ComboBox>
-                <CheckBox Content="Apply changes later" Margin="0,150,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="LaterCheckBox" Content="Apply changes later" Margin="0,150,0,0" VerticalAlignment="Top"/>
 
             </Grid>
         </ScrollViewer>
