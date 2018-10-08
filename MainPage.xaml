@@ -20,18 +20,42 @@
                     <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="1" BackgroundSource="HostBackdrop"/>
                 </Rectangle.Fill>
             </Rectangle>
+            <Pivot x:Name="rootPivot" Margin="0,32,0,0" HeaderFocusVisualPlacement="ItemHeaders">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="Files" FontSize="15"/>
+                    </PivotItem.Header>
+                    <!--Pivot content goes here-->
+                    <Grid x:Name="NoArts" Margin="0,25.946,0,0" HorizontalAlignment="Stretch" Grid.Row="1">
+                        <FontIcon Glyph="&#xE838;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" FontSize="40"/>
+                        <TextBlock Text="Here you will see your projects" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,0,0">
+                            <TextBlock Text="Can't find your project?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
+                            <HyperlinkButton Content="Open Explorer" HorizontalAlignment="Center" Margin="5,-6,0,0" VerticalAlignment="Top" Height="32" Width="95"/>
+                        </StackPanel>
+                    </Grid>
+
+                </PivotItem>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="Notes" FontSize="15"/>
+                    </PivotItem.Header>
+                    <!--Pivot content goes here-->
+                    <Grid x:Name="NoNotes" Margin="0,25.946,0,0" HorizontalAlignment="Stretch" Grid.Row="1">
+                        <FontIcon Glyph="&#xE70B;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" FontSize="40"/>
+                        <TextBlock Text="Here you will see your notes" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,0,0">
+                            <TextBlock Text="Do not have any notes yet?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
+                            <HyperlinkButton Content="Create note" HorizontalAlignment="Center" Margin="0,-6,0,0" VerticalAlignment="Top" Height="32" Width="95"/>
+                        </StackPanel>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
             <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Width="48" Background="{x:Null}">
                 <AppBarButton Icon="Add" Label="Create new project" Click="AddNew" />
                 <AppBarButton Icon="Setting" Label="Settings" Click="OpenSettings" />
             </CommandBar>
-        </Grid>
-        <Grid x:Name="EmptyArts" Margin="0,25.946,0,0" HorizontalAlignment="Stretch" Grid.Row="1">
-            <FontIcon Glyph="&#xE838;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" FontSize="40"/>
-            <TextBlock Text="Here you will see your projects" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,0,0">
-                <TextBlock Text="Can't find your project?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
-                <HyperlinkButton Content="Open Explorer" HorizontalAlignment="Center" Margin="5,-6,0,0" VerticalAlignment="Top" Height="32" Width="95"/>
-            </StackPanel>
+
         </Grid>
     </Grid>
 </Page>
