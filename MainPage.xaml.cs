@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using FixerEditor.HomeFolder;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
 
@@ -40,6 +41,12 @@ namespace FixerEditor
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Fixer Editor";
+
+            FilesFrame.Navigate(typeof(Files));
+
+            MusicFrame.Navigate(typeof(Music));
+
+            NotesFrame.Navigate(typeof(Notes));
 
             LoadProjects();
 

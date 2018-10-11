@@ -544,8 +544,8 @@ namespace FixerEditor
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            //Working = false;
-            //await Task.Delay(50);
+            Working = false;
+            await Task.Delay(50);
 
             //pv.FileNameEdit = File.Name;
             //FileSettings FileOptionsDialog = new FileSettings();
