@@ -51,10 +51,16 @@ namespace FixerEditor
 
             SetTheme();
 
+            if (AppVar.OpenNewFile == true)
+            {
+                File = AppVar.AppFile;
+            }
+
             if (AppVar.FileTypeEdit == FileTypes.TextFile)
             {
                 PlayFile.Visibility = Visibility.Collapsed;
             }
+
             else
             {
                 PlayFile.Visibility = Visibility.Visible;
@@ -271,43 +277,48 @@ namespace FixerEditor
         #region Save
         private async void SaveButton(object sender, RoutedEventArgs e)
         {
-            Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-
-            // Dropdown of file types the user can save the file as
-            if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
-                savePicker.FileTypeChoices.Add("HTML file", new List<string>() { ".html" });
-            else
-                savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
-
-            // Default file name if the user does not type one in or select a file to replace
-            savePicker.SuggestedFileName = AppVar.FileNameEdit;
-
-            Windows.Storage.StorageFile File = await savePicker.PickSaveFileAsync();
-            if (File != null)
+            if (File == null)
             {
-                // Prevent updates to the remote version of the file until we
-                // finish making changes and call CompleteUpdatesAsync.
-                Windows.Storage.CachedFileManager.DeferUpdates(File);
-                // write to file
-                Windows.Storage.Streams.IRandomAccessStream randAccStream =
-                    await File.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                Windows.Storage.Pickers.FileSavePicker savePicker = new Windows.Storage.Pickers.FileSavePicker();
+                savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
 
-                editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
-
-                // Let Windows know that we're finished changing the file so the
-                // other app can update the remote version of the file.
-                Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(File);
-                if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
-                {
-                    Windows.UI.Popups.MessageDialog errorBox =
-                        new Windows.UI.Popups.MessageDialog("File " + File.Name + " couldn't be saved.");
-                    await errorBox.ShowAsync();
-                }
+                if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+                    savePicker.FileTypeChoices.Add("HTML file", new List<string>() { ".html" });
                 else
+                    savePicker.FileTypeChoices.Add("Text file", new List<string>() { ".txt" });
+
+                savePicker.SuggestedFileName = AppVar.FileNameEdit;
+
+                Windows.Storage.StorageFile File = await savePicker.PickSaveFileAsync();
+                if (File != null)
                 {
-                    AppTitle.Text = File.Name;
+                    Windows.Storage.CachedFileManager.DeferUpdates(File);
+
+                    Windows.Storage.Streams.IRandomAccessStream randAccStream =
+                        await File.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+
+                    editor.Document.SaveToStream(Windows.UI.Text.TextGetOptions.None, randAccStream);
+
+                    // Let Windows know that we're finished changing the file so the
+                    // other app can update the remote version of the file.
+                    Windows.Storage.Provider.FileUpdateStatus status = await Windows.Storage.CachedFileManager.CompleteUpdatesAsync(File);
+                    if (status != Windows.Storage.Provider.FileUpdateStatus.Complete)
+                    {
+                        Windows.UI.Popups.MessageDialog errorBox =
+                            new Windows.UI.Popups.MessageDialog("File " + File.Name + " couldn't be saved.");
+                        await errorBox.ShowAsync();
+                    }
+                    else
+                    {
+                        AppTitle.Text = File.Name;
+                    }
                 }
+
+            }
+            else
+            {
+                editor.Document.GetText(TextGetOptions.None, out string docText);
+                await Windows.Storage.FileIO.WriteTextAsync(File, docText);
             }
         }
 

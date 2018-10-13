@@ -26,5 +26,39 @@ namespace FixerEditor.HomeFolder
         {
             this.InitializeComponent();
         }
+
+        async void OpenFile(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+            picker.FileTypeFilter.Add(".txt");
+            picker.FileTypeFilter.Add(".html");
+
+            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                //Application now has read/ write access to the picked file
+                AppVar.OpenNewFile = true;
+                AppVar.FileOpenText = await Windows.Storage.FileIO.ReadTextAsync(file);
+                AppVar.AppFile = file;
+                //Frame.Navigate(typeof(HtmlFile));
+                //MainPage.OpenNewFile();
+                //MainPage p = new MainPage();
+                //p.OpenNewFile();
+
+            }
+            else
+            {
+                ContentDialog ErrorDialog = new ContentDialog()
+                {
+                    Title = "Error",
+                    Content = "Operation was calceled",
+                    CloseButtonText = "OK"
+                };
+
+                await ErrorDialog.ShowAsync();
+            }
+        }
     }
 }

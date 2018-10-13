@@ -15,6 +15,12 @@ namespace FixerEditor
     class AppVar
     {
         public static FileTypes FileTypeEdit;
+
         public static string FileNameEdit;
+        public static string FileOpenText;
+
+        public static bool OpenNewFile;
+
+        public static Windows.Storage.StorageFile AppFile;
     }
 }

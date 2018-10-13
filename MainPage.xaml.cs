@@ -172,5 +172,10 @@ namespace FixerEditor
         {
             Frame.Navigate(typeof(Settings));
         }
+
+        public  void OpenNewFile()
+        {
+            Frame.Navigate(typeof(HtmlFile));
+        }
     }
 }

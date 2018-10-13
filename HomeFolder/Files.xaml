@@ -13,7 +13,7 @@
         <TextBlock Text="Here you will see your projects" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,0,0">
             <TextBlock Text="Can't find your project?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
-            <HyperlinkButton Content="Open Explorer" HorizontalAlignment="Center" Margin="5,-6,0,0" VerticalAlignment="Top" Height="32" Width="95"/>
+            <HyperlinkButton Content="Open Explorer" HorizontalAlignment="Center" Margin="5,-6,0,0" VerticalAlignment="Top" Height="32" Width="95" Click="OpenFile"/>
         </StackPanel>
     </Grid>
 </Page>
