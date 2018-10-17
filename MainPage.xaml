@@ -41,7 +41,8 @@
                 </PivotItem>
             </Pivot>
             <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Width="48" Background="{x:Null}">
-                <AppBarButton Icon="Add" Label="Create new project" Click="AddNew" />
+                <AppBarButton Icon="Page2" Label="Create new file" Click="AddNew" />
+                <AppBarButton Icon="AlignLeft" Label="Create new note" Click="NewNote" />
                 <AppBarButton Icon="Setting" Label="Settings" Click="OpenSettings" />
             </CommandBar>
 

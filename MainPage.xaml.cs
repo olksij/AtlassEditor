@@ -173,9 +173,28 @@ namespace FixerEditor
             Frame.Navigate(typeof(Settings));
         }
 
-        public  void OpenNewFile()
+        public static void OpenNewFile()
         {
-            Frame.Navigate(typeof(HtmlFile));
+            var instance = new MainPage();
+            instance.OpenNewFile2();
+        }
+
+        void OpenNewFile2()
+        {
+            Frame.Navigate(typeof(Settings));
+        }
+
+        private async void NewNote(object sender, RoutedEventArgs e)
+        {
+            ContentDialog ErrorDialog = new ContentDialog()
+            {
+                Title = "Error",
+                Content = "Wait for next update",
+                CloseButtonText = "OK"
+            };
+
+            await ErrorDialog.ShowAsync();
+
         }
     }
 }

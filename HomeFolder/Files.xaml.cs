@@ -43,7 +43,7 @@ namespace FixerEditor.HomeFolder
                 AppVar.FileOpenText = await Windows.Storage.FileIO.ReadTextAsync(file);
                 AppVar.AppFile = file;
                 //Frame.Navigate(typeof(HtmlFile));
-                //MainPage.OpenNewFile();
+                
                 //MainPage p = new MainPage();
                 //p.OpenNewFile();
 

@@ -71,30 +71,30 @@ namespace FixerEditor
 
         async void ForceFileSave()
         {
-            if (CreateFile.CreateFileNow)
-            {
-                string FileTypeString;
-                if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
-                {
-                    FileTypeString = ".html";
-                }
-                else
-                {
-                    FileTypeString = ".txt";
-                }
-                //Windows.Storage.StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-                //StorageFolder Documents = await Windows.Storage.KnownFolders.PicturesLibrary;
+            //if (CreateFile.CreateFileNow)
+            //{
+            //    string FileTypeString;
+            //    if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+            //    {
+            //        FileTypeString = ".html";
+            //    }
+            //    else
+            //    {
+            //        FileTypeString = ".txt";
+            //    }
+            //    //Windows.Storage.StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //    //StorageFolder Documents = await Windows.Storage.KnownFolders.PicturesLibrary;
 
-                //File = await Documents.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, CreationCollisionOption.GenerateUniqueName);
+            //    //File = await Documents.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, CreationCollisionOption.GenerateUniqueName);
 
-            }
+            //}
         }
 
         #region Loop editor work
         async void Work()
         {
-            ForceFileSave();
-            CreateFile.CreateFileNow = false;
+            //ForceFileSave();
+            //CreateFile.CreateFileNow = false;
 
             while (Working)
             {
