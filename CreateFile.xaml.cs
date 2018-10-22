@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace FixerEditor
+namespace AtlassEditor
 {
     public enum CreateFileResult
     {

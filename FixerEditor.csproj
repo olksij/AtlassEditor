@@ -7,8 +7,8 @@
     <ProjectGuid>{F40AA7EA-9256-467F-9EFC-A60ED374952D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FixerEditor</RootNamespace>
-    <AssemblyName>FixerEditor</AssemblyName>
+    <RootNamespace>AtlassEditor</RootNamespace>
+    <AssemblyName>AtlassEditor</AssemblyName>
     <DefaultLanguage>en-gb</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>

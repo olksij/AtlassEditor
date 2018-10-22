@@ -1,4 +1,4 @@
-﻿using FixerEditor;
+﻿using AtlassEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,11 +16,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using FixerEditor.HomeFolder;
+using AtlassEditor.HomeFolder;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
 
-namespace FixerEditor
+namespace AtlassEditor
 {
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
@@ -40,7 +40,7 @@ namespace FixerEditor
             var full = (ApplicationView.GetForCurrentView().IsFullScreenMode);
             var left = 12 + (full ? 0 : CoreApplication.GetCurrentView().TitleBar.SystemOverlayLeftInset);
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
-            AppTitle.Text = "Fixer Editor";
+            AppTitle.Text = "Atlass Editor";
 
             FilesFrame.Navigate(typeof(Files));
 

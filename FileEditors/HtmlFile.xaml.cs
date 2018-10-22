@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
-using FixerEditor;
+using AtlassEditor;
 using Windows.UI.Core;
-using FixerEditor.FileEditors;
+using AtlassEditor.FileEditors;
 using Windows.Storage;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace FixerEditor
+namespace AtlassEditor
 {
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
