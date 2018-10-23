@@ -10,9 +10,9 @@
 
     <Grid x:Name="NoArts" Margin="0,25.946,0,0" HorizontalAlignment="Stretch" Grid.Row="1">
         <FontIcon Glyph="&#xE838;" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" FontSize="40"/>
-        <TextBlock Text="Here you will see your projects" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
+        <TextBlock Text="Here you will see your files" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,65,0,0">
-            <TextBlock Text="Can't find your project?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
+            <TextBlock Text="Can't find your files?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="21"/>
             <HyperlinkButton Content="Open Explorer" HorizontalAlignment="Center" Margin="5,-6,0,0" VerticalAlignment="Top" Height="32" Width="95" Click="OpenFile"/>
         </StackPanel>
     </Grid>
