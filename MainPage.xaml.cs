@@ -173,10 +173,9 @@ namespace AtlassEditor
             Frame.Navigate(typeof(Settings));
         }
 
-        public static void OpenNewFile()
+        public void OpenNewFile()
         {
-            var instance = new MainPage();
-            instance.OpenNewFile2();
+            Frame.Navigate(typeof(HtmlFile));
         }
 
         void OpenNewFile2()

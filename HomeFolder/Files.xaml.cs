@@ -43,9 +43,10 @@ namespace AtlassEditor.HomeFolder
                 AppVar.FileOpenText = await Windows.Storage.FileIO.ReadTextAsync(file);
                 AppVar.AppFile = file;
                 //Frame.Navigate(typeof(HtmlFile));
-                
+
                 //MainPage p = new MainPage();
                 //p.OpenNewFile();
+                OpenEditor();
 
             }
             else
@@ -59,6 +60,11 @@ namespace AtlassEditor.HomeFolder
 
                 await ErrorDialog.ShowAsync();
             }
+        }
+        static void OpenEditor()
+        {
+            MainPage p = new MainPage();
+            p.OpenNewFile();
         }
     }
 }
