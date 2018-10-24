@@ -27,8 +27,8 @@ namespace AtlassEditor
     /// </summary>
     public sealed partial class HtmlFile : Page
     {
-        List<string> blue = new List<string>() { "close", "new" };
-        List<string> pink = new List<string>() { "grid", "button" };
+        List<string> blue = new List<string>() { "body", "head" };
+        List<string> pink = new List<string>() { "button", "rectangle" };
         List<string> orange = new List<string>() { "{", "}" };
 
         List<string> TextActions = new List<string>();
@@ -69,25 +69,26 @@ namespace AtlassEditor
             Work();
         }
 
-        async void ForceFileSave()
+        void ForceFileSave()
         {
-            //if (CreateFile.CreateFileNow)
-            //{
-            //    string FileTypeString;
-            //    if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
-            //    {
-            //        FileTypeString = ".html";
-            //    }
-            //    else
-            //    {
-            //        FileTypeString = ".txt";
-            //    }
-            //    //Windows.Storage.StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            //    //StorageFolder Documents = await Windows.Storage.KnownFolders.PicturesLibrary;
+            if (CreateFile.CreateFileNow)
+            {
+                //string FileTypeString;
+                //if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+                //{
+                //    FileTypeString = ".html";
+                //}
+                //else
+                //{
+                //    FileTypeString = ".txt";
+                //}
+                //Windows.Storage.StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                //StorageFolder Documents = await Windows.Storage.KnownFolders.PicturesLibrary;
 
-            //    //File = await Documents.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, CreationCollisionOption.GenerateUniqueName);
+                //File = await Documents.CreateFileAsync(AppVar.FileNameEdit + FileTypeString, CreationCollisionOption.GenerateUniqueName);
+                SaveButtonAction();
 
-            //}
+            }
         }
 
         #region Loop editor work
@@ -406,21 +407,15 @@ namespace AtlassEditor
 
         private async void PlayButton(object sender, RoutedEventArgs e)
         {
-            Working = false;
-            await Task.Delay(50);
+            //Working = false;
+            //await Task.Delay(50);
 
-            if (File == null)
-            {
-                SaveButtonAction();
-                AutoSave();
-            }
-
-            else
-            {
-                AutoSave();
-            }
-
-            //RunFileBrowser();
+            //if (File == null)
+            //{
+            //    SaveButtonAction();
+            //}
+            //AutoSave();
+            RunFileWindow();
         }
 
         async void RunFileBrowser()
@@ -452,19 +447,26 @@ namespace AtlassEditor
 
         async void RunFileWindow()
         {
+            //try
+            //{
             CoreApplicationView newView = CoreApplication.CreateNewView();
             int newViewId = 0;
             await newView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 Frame frame = new Frame();
-                frame.Navigate(typeof(MainPage));
-                Window.Current.Content = frame;
-                // You have to activate the window in order to show it later.
-                Window.Current.Activate();
+                    frame.Navigate(typeof(MainPage));
+                    Window.Current.Content = frame;
+                    // You have to activate the window in order to show it later.
+                    Window.Current.Activate();
 
                 newViewId = ApplicationView.GetForCurrentView().Id;
             });
             bool viewShown = await ApplicationViewSwitcher.TryShowAsStandaloneAsync(newViewId);
+            //}
+            //catch (Exception ex)
+            //{
+            //    editor.Document.SetText(TextSetOptions.None, ex.ToString());
+            //}
         }
 
         async void AutoSave()
