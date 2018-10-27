@@ -120,22 +120,31 @@ namespace AtlassEditor
                 editor.Padding = Padding;
                 // Undo/Redo options UI
                 #region Redo and Undo
-                if (ActionNavigation !=0)
+                if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
                 {
-                    UndoB.IsEnabled = true;
-                }
-                else
-                {
-                    UndoB.IsEnabled = false;
-                }
+                    if (ActionNavigation != 0)
+                    {
+                        UndoB.IsEnabled = true;
+                    }
+                    else
+                    {
+                        UndoB.IsEnabled = false;
+                    }
 
-                if (TextActions.Count-1 != ActionNavigation)
-                {
-                    RedoB.IsEnabled = true;
+                    if (TextActions.Count - 1 != ActionNavigation)
+                    {
+                        RedoB.IsEnabled = true;
+                    }
+                    else
+                    {
+                        RedoB.IsEnabled = false;
+                    }
+
                 }
                 else
                 {
-                    RedoB.IsEnabled = false;
+                    RedoB.IsEnabled = editor.Document.CanRedo();
+                    UndoB.IsEnabled = editor.Document.CanUndo();
                 }
                 #endregion
             }
@@ -208,22 +217,36 @@ namespace AtlassEditor
 
         private void UndoButton(object sender, RoutedEventArgs e)
         {
-            textsaving = true;
-            ActionNavigation -= 1;
-            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
-            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
-            textsaving = false;
-
+            if(AppVar.FileTypeEdit == FileTypes.HtmlFile)
+            {
+                textsaving = true;
+                ActionNavigation -= 1;
+                editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
+                var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
+                textsaving = false;
+            }
+            else
+            {
+                editor.Document.Undo();
+            }
 
         }
 
         private void RedoButton(object sender, RoutedEventArgs e)
         {
-            textsaving = true;
-            ActionNavigation += 1;
-            editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
-            var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
-            textsaving = false;
+            if (AppVar.FileTypeEdit == FileTypes.HtmlFile)
+            {
+                textsaving = true;
+                ActionNavigation += 1;
+                editor.Document.SetText(TextSetOptions.None, TextActions[ActionNavigation]);
+                var range1 = editor.Document.GetRange(PointerActions[ActionNavigation], PointerActions[ActionNavigation]);
+                textsaving = false;
+            }
+            else
+            {
+                editor.Document.Redo();
+            }
+
         }
 
         void SaveAction()

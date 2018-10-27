@@ -7,10 +7,77 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="AppBarButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonRevealBackground}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonRevealBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonRevealBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <Setter Property="FocusVisualMargin" Value="-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="PointerOver"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPointerOver}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPointerOver}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPointerOver}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.(RevealBrush.State)" Value="Pressed"/>
+                                            <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundPressed}"/>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushPressed}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundPressed}"/>
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Target="RootGrid.Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#00FFFFFF" Opacity="0"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}"/>
+                                            <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
 
     <Grid x:Name="MainGrid">
-        <Rectangle x:Name="header" Height="80" VerticalAlignment="Top" Margin="0,0,0,0">
+        <Rectangle x:Name="header" Height="76" VerticalAlignment="Top" Margin="0,0,0,0">
             <Rectangle.Fill>
                 <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
             </Rectangle.Fill>
@@ -18,30 +85,26 @@
         <CommandBar Width="48" Height="48" HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}" FocusVisualPrimaryThickness="0,0,0,0">
             <AppBarButton Label="Options" Icon="Setting" Click="AppBarButton_Click"/>
         </CommandBar>
-        <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="0,32,0,0">
-            <AppBarButton.Icon>
-                <SymbolIcon Symbol="Home"/>
-            </AppBarButton.Icon>
+        <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+                <FontIcon Glyph="&#xE80F;" HorizontalAlignment="Center" VerticalAlignment="Top" Width="20" Margin="0,0,0,0" FontSize="18"/>
         </AppBarButton>
-        <AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="58,32,0,0">
+        <!--AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="58,32,0,0">
             <AppBarButton.Icon>
                 <FontIcon Glyph="&#xE7A7;" FontSize="17"/>
             </AppBarButton.Icon>
+        </-->
+        <AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+            <FontIcon Glyph="&#xE7A7;" FontSize="16"/>
         </AppBarButton>
-        <AppBarButton x:Name="PlayFile" Click="PlayButton" ToolTipService.ToolTip="Run the file" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="212,32,0,0">
-            <AppBarButton.Icon>
+
+        <AppBarButton x:Name="PlayFile" Click="PlayButton" ToolTipService.ToolTip="Run the file" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="177,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
                 <SymbolIcon Symbol="Play"/>
-            </AppBarButton.Icon>
         </AppBarButton>
-        <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="106,32,0,0" Foreground="Black">
-            <AppBarButton.Icon>
-                <FontIcon Glyph="&#xE7A6;" FontSize="17"/>
-            </AppBarButton.Icon>
+        <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+                <FontIcon Glyph="&#xE7A6;" FontSize="16"/>
         </AppBarButton>
-        <AppBarButton Click="SaveButton" ToolTipService.ToolTip="Save File" Margin="164,32,0,0" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" RenderTransformOrigin="-18.062,0.49" VerticalAlignment="Top">
-            <AppBarButton.Icon>
+        <AppBarButton Click="SaveButton" ToolTipService.ToolTip="Save File" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="133,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
                 <FontIcon Glyph="&#xE74E;" FontSize="17"/>
-            </AppBarButton.Icon>
         </AppBarButton>
         <TextBlock x:Name="AppTitle"
             xmlns:appmodel="using:Windows.ApplicationModel"
