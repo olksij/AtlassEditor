@@ -48,7 +48,6 @@
                     <controls:NavigationViewItem Icon="AlignLeft" Content="Notes"/>
                 </controls:NavigationView.MenuItems>
             </controls:NavigationView>-->
-            <SymbolIcon Symbol="AlignLeft"/>
             <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Width="48" Background="{x:Null}">
                 <AppBarButton Icon="Page2" Label="Create new file" Click="AddNew" />
                 <AppBarButton Icon="AlignLeft" Label="Create new note" Click="NewNote" />
