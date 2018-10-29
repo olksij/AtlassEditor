@@ -9,16 +9,17 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+
         <Rectangle x:Name="header" Height="80" VerticalAlignment="Top">
             <Rectangle.Fill>
                 <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
             </Rectangle.Fill>
         </Rectangle>
+        <TextBlock x:Name="AppTitle"
+            xmlns:appmodel="using:Windows.ApplicationModel" Style="{StaticResource CaptionTextBlockStyle}" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Stretch"/>
         <AppBarButton Width="48" Height="48" Margin="0,32,0,0" Click="BackButton">
             <SymbolIcon Symbol="Home"/>
         </AppBarButton>
-        <TextBlock x:Name="AppTitle"
-            xmlns:appmodel="using:Windows.ApplicationModel" Style="{StaticResource CaptionTextBlockStyle}" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Stretch" Grid.RowSpan="2" VerticalAlignment="Stretch"/>
         <ScrollViewer Margin="0,80,0,0">
             <StackPanel Margin="0,0,0,0" Padding="20,20,0,0">
                 <TextBlock

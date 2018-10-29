@@ -5,8 +5,6 @@
     xmlns:local="using:AtlassEditor"
     RequestedTheme="Dark">
     <Application.Resources>
-        <ResourceDictionary>
-            <Color x:Key="SystemAccentColor">#0078d7</Color>
-        </ResourceDictionary>
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
     </Application.Resources>
 </Application>
