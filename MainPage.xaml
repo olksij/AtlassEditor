@@ -25,6 +25,12 @@
             <Pivot x:Name="rootPivot" Margin="0,32,0,0" HeaderFocusVisualPlacement="ItemHeaders">
                 <PivotItem>
                     <PivotItem.Header>
+                        <TextBlock Text="Home" FontSize="15"/>
+                    </PivotItem.Header>
+                    <Frame x:Name="HomeFrame"/>
+                </PivotItem>
+                <PivotItem>
+                    <PivotItem.Header>
                         <TextBlock Text="Files" FontSize="15"/>
                     </PivotItem.Header>
                     <Frame x:Name="FilesFrame"/>
@@ -35,24 +41,21 @@
                     </PivotItem.Header>
                     <Frame x:Name="NotesFrame"/>
                 </PivotItem>
-                <PivotItem>
-                    <PivotItem.Header>
-                        <TextBlock Text="Music Player" FontSize="15"/>
-                    </PivotItem.Header>
-                    <Frame x:Name="MusicFrame"/>
-                </PivotItem>
             </Pivot>
+            
             <!--<controls:NavigationView  PaneDisplayMode="Auto">
                 <controls:NavigationView.MenuItems>
-                    <controls:NavigationViewItem Icon="Page2" Content="Files" IsSelected="True"/>
-                    <controls:NavigationViewItem Icon="AlignLeft" Content="Notes"/>
+                    <controls:NavigationViewItem Content="Files" IsSelected="True"/>
+                    <controls:NavigationViewItem Content="Notes"/>
                 </controls:NavigationView.MenuItems>
             </controls:NavigationView>-->
-            <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Width="48" Background="{x:Null}">
+            
+            <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}" Width="48">
                 <AppBarButton Icon="Page2" Label="Create new file" Click="AddNew" />
                 <AppBarButton Icon="AlignLeft" Label="Create new note" Click="NewNote" />
                 <AppBarButton Icon="Setting" Label="Settings" Click="OpenSettings" />
             </CommandBar>
+            <AutoSuggestBox HorizontalAlignment="Right" Margin="0,37,55,0" Width="190" Height="32" QueryIcon="Find" PlaceholderText="Search File"/>
 
         </Grid>
     </Grid>

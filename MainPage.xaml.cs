@@ -44,7 +44,7 @@ namespace AtlassEditor
 
             FilesFrame.Navigate(typeof(Files));
 
-            MusicFrame.Navigate(typeof(Music));
+            HomeFrame.Navigate(typeof(Homepage));
 
             NotesFrame.Navigate(typeof(Notes));
 
