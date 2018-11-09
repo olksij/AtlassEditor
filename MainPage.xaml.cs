@@ -42,11 +42,11 @@ namespace AtlassEditor
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Atlass Editor";
 
-            FilesFrame.Navigate(typeof(Files));
+            //FilesFrame.Navigate(typeof(Files));
 
-            HomeFrame.Navigate(typeof(Homepage));
+            //HomeFrame.Navigate(typeof(Homepage));
 
-            NotesFrame.Navigate(typeof(Notes));
+            //NotesFrame.Navigate(typeof(Notes));
 
             LoadProjects();
 
