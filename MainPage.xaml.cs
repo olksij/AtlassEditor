@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using muxs = Microsoft.UI.Xaml.Controls;
 using AtlassEditor.HomeFolder;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
@@ -42,11 +43,11 @@ namespace AtlassEditor
             AppTitle.Margin = new Thickness(left, 8, 0, 0);
             AppTitle.Text = "Atlass Editor";
 
-            //FilesFrame.Navigate(typeof(Files));
+            NavigationPanel.IsBackEnabled = true;
+            NavigationPanel.SelectedItem = NavigationPanel.MenuItems[0];
+            NavigationPanel.BackRequested += NavView_BackRequested;
 
-            //HomeFrame.Navigate(typeof(Homepage));
-
-            //NotesFrame.Navigate(typeof(Notes));
+            NavigationFrame.Navigate(typeof(Homepage));
 
             LoadProjects();
 
@@ -194,6 +195,43 @@ namespace AtlassEditor
 
             await ErrorDialog.ShowAsync();
 
+        }
+
+        private void NavigateFiles(object sender, TappedRoutedEventArgs e)
+        {
+            NavigationFrame.Navigate(typeof(Files));
+        }
+
+        private void NavigateHome(object sender, TappedRoutedEventArgs e)
+        {
+        }
+
+        private void NavigateNotes(object sender, TappedRoutedEventArgs e)
+        {
+            NavigationFrame.Navigate(typeof(Notes));
+        }
+
+        private void NavView_BackRequested(muxs.NavigationView sender,
+                                           muxs.NavigationViewBackRequestedEventArgs args)
+        {
+            //NavigationFrame.GoBack();
+        }
+
+        private void NavView_SelectionChanged(muxs.NavigationView sender, muxs.NavigationViewSelectionChangedEventArgs args)
+        {
+            var navItemTag = args.SelectedItemContainer.Tag.ToString();
+            if(navItemTag == "Home")
+            {
+                NavigationFrame.Navigate(typeof(Homepage));
+            }
+            if (navItemTag == "Files")
+            {
+                NavigationFrame.Navigate(typeof(File));
+            }
+            if (navItemTag == "Notes")
+            {
+                NavigationFrame.Navigate(typeof(Notes));
+            }
         }
     }
 }

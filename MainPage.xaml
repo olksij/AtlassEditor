@@ -44,11 +44,11 @@
                 </PivotItem>
             </Pivot>-->
 
-            <controls:NavigationView  PaneDisplayMode="Top" Margin="0,32,0,0" IsSettingsVisible="False">
+            <controls:NavigationView x:Name="NavigationPanel" PaneDisplayMode="Top" Margin="0,32,0,0" IsSettingsVisible="False" BackRequested="NavView_BackRequested">
                 <controls:NavigationView.MenuItems>
-                    <controls:NavigationViewItem Content="Home" IsSelected="True"/>
-                    <controls:NavigationViewItem Content="Files"/>
-                    <controls:NavigationViewItem Content="Notes"/>
+                    <controls:NavigationViewItem Content="Home" Tag="Home"/>
+                    <controls:NavigationViewItem Content="Files" Tag="Files"/>
+                    <controls:NavigationViewItem Content="Notes" Tag="Notes"/>
                 </controls:NavigationView.MenuItems>
                 <controls:NavigationView.PaneFooter>
                     <Grid>
@@ -60,6 +60,7 @@
                         </CommandBar>
                     </Grid>
                 </controls:NavigationView.PaneFooter>
+                <Frame x:Name="NavigationFrame"/>
 
             </controls:NavigationView>
             

@@ -77,41 +77,39 @@
 
 
     <Grid x:Name="MainGrid">
-        <Rectangle x:Name="header" Height="76" VerticalAlignment="Top" Margin="0,0,0,0">
+        <Rectangle x:Name="header" Height="72" VerticalAlignment="Top" Margin="0,0,0,0">
             <Rectangle.Fill>
                 <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="0.8" BackgroundSource="HostBackdrop"/>
             </Rectangle.Fill>
         </Rectangle>
-        <AppBarButton ToolTipService.ToolTip="More" Width="42" Height="42" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="1,33,1,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+        <!--<AppBarButton ToolTipService.ToolTip="More" Width="38" Height="38" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="1,33,1,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
             <FontIcon Glyph="&#xE10C;" HorizontalAlignment="Center" VerticalAlignment="Top" Width="20" Margin="0,0,0,0" FontSize="18"/>
             <AppBarButton.Flyout>
                 <Flyout>
                     <AppBarButton Label="Options" Icon="Setting"/>
                 </Flyout>
             </AppBarButton.Flyout>
-        </AppBarButton>
+        </AppBarButton>-->
 
-        <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+        <AppBarButton Click="BackButton" ToolTipService.ToolTip="Back to home" Width="38" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
                 <FontIcon Glyph="&#xE80F;" HorizontalAlignment="Center" VerticalAlignment="Top" Width="20" Margin="0,0,0,0" FontSize="18"/>
         </AppBarButton>
-        <!--AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="48" Height="48" HorizontalAlignment="Left" FontSize="11" VerticalAlignment="Top" Margin="58,32,0,0">
-            <AppBarButton.Icon>
-                <FontIcon Glyph="&#xE7A7;" FontSize="17"/>
-            </AppBarButton.Icon>
-        </-->
-        <AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+        <AppBarButton x:Name="UndoB" Click="UndoButton" ToolTipService.ToolTip="Undo - Coming soon" Width="38" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
             <FontIcon Glyph="&#xE7A7;" FontSize="16"/>
         </AppBarButton>
 
-        <AppBarButton x:Name="PlayFile" Click="PlayButton" ToolTipService.ToolTip="Run the file" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="177,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
+        <AppBarButton x:Name="PlayFile" Click="PlayButton" ToolTipService.ToolTip="Run the file" Width="38" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
                 <SymbolIcon Symbol="Play"/>
         </AppBarButton>
-        <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
+        <AppBarButton x:Name="RedoB" Click="RedoButton" ToolTipService.ToolTip="Redo - Coming soon" Width="38" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}" Background="{x:Null}">
                 <FontIcon Glyph="&#xE7A6;" FontSize="16"/>
         </AppBarButton>
-        <AppBarButton Click="SaveButton" ToolTipService.ToolTip="Save File" Width="42" Height="42" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="133,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
+        <AppBarButton Click="SaveButton" ToolTipService.ToolTip="Save File" Width="38" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="121,33,0,0" BorderThickness="1,1,1,1" Style="{StaticResource AppBarButtonStyle1}"  Background="{x:Null}">
                 <FontIcon Glyph="&#xE74E;" FontSize="17"/>
         </AppBarButton>
+        <CommandBar HorizontalAlignment="Right" Margin="0,32,0,0" Background="{x:Null}" Width="48">
+            <AppBarButton Icon="Setting" Label="Options" Click="AppBarButton_Click"/>
+        </CommandBar>
         <TextBlock x:Name="AppTitle"
             xmlns:appmodel="using:Windows.ApplicationModel"
             Style="{StaticResource CaptionTextBlockStyle}"
