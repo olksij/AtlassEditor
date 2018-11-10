@@ -18,9 +18,9 @@
             IsHitTestVisible="False"
             Canvas.ZIndex="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Stretch"/>
         <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.RowSpan="2" VerticalAlignment="Stretch">
-            <Rectangle x:Name="header" VerticalAlignment="Top" Height="70">
+            <Rectangle x:Name="header" VerticalAlignment="Top" Height="32">
                 <Rectangle.Fill>
-                    <Windows10FallCreatorsUpdate:AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="1" BackgroundSource="HostBackdrop"/>
+                    <Windows10FallCreatorsUpdate:AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="1" BackgroundSource="Backdrop"/>
                 </Rectangle.Fill>
             </Rectangle>
             <!--<Pivot x:Name="rootPivot" Margin="0,32,0,0" HeaderFocusVisualPlacement="ItemHeaders">
@@ -44,7 +44,7 @@
                 </PivotItem>
             </Pivot>-->
 
-            <controls:NavigationView x:Name="NavigationPanel" PaneDisplayMode="Top" Margin="0,32,0,0" IsSettingsVisible="False" BackRequested="NavView_BackRequested">
+            <controls:NavigationView x:Name="NavigationPanel" Margin="0,32,0,0" IsSettingsVisible="False" BackRequested="NavView_BackRequested" PaneDisplayMode="Top">
                 <controls:NavigationView.MenuItems>
                     <controls:NavigationViewItem Content="Home" Tag="Home"/>
                     <controls:NavigationViewItem Content="Files" Tag="Files"/>
@@ -52,7 +52,7 @@
                 </controls:NavigationView.MenuItems>
                 <controls:NavigationView.PaneFooter>
                     <Grid>
-                        <AutoSuggestBox HorizontalAlignment="Right" Margin="0,4,55,0" Width="190" Height="32" QueryIcon="Find" PlaceholderText="Search File"/>
+                        <!--<AutoSuggestBox HorizontalAlignment="Right" Margin="0,4,55,0" Width="190" Height="32" QueryIcon="Find" PlaceholderText="Search File"/>-->
                         <CommandBar HorizontalAlignment="Right" Margin="0,0,0,0" Background="{x:Null}" Width="48">
                             <AppBarButton Icon="Page2" Label="Create new file" Click="AddNew" />
                             <AppBarButton Icon="AlignLeft" Label="Create new note" Click="NewNote" />
@@ -60,12 +60,13 @@
                         </CommandBar>
                     </Grid>
                 </controls:NavigationView.PaneFooter>
+                <controls:NavigationView.AutoSuggestBox>
+                    <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find" Width="200"/>
+                </controls:NavigationView.AutoSuggestBox>
+
                 <Frame x:Name="NavigationFrame"/>
 
             </controls:NavigationView>
-            
-
-
 
         </Grid>
     </Grid>
