@@ -47,11 +47,28 @@ namespace AtlassEditor
             NavigationPanel.SelectedItem = NavigationPanel.MenuItems[0];
             NavigationPanel.BackRequested += NavView_BackRequested;
 
+            //WelcomeScreen();
+
             NavigationFrame.Navigate(typeof(Homepage));
 
             LoadProjects();
 
             SetTheme();
+        }
+
+        void WelcomeScreen()
+        {
+            //Windows.Storage.ApplicationDataContainer localData = Windows.Storage.ApplicationData.Current.LocalSettings;
+            //Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            //if (localData.Values["opened"] == null)
+            //{
+            //    Frame.Navigate(typeof(Welcome));
+            //    localData.Values["opened"] = "true";
+            //}
+            Frame.Navigate(typeof(Welcome));
+
+
         }
 
         /// <summary>
@@ -219,7 +236,7 @@ namespace AtlassEditor
 
         private void NavView_SelectionChanged(muxs.NavigationView sender, muxs.NavigationViewSelectionChangedEventArgs args)
         {
-            var navItemTag = args.SelectedItemContainer.Tag.ToString();
+            var navItemTag = args.SelectedItemContainer.Content.ToString();
             if(navItemTag == "Home")
             {
                 NavigationFrame.Navigate(typeof(Homepage));

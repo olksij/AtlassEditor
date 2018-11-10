@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="AtlassEditor.Welcome"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AtlassEditor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Windows10FallCreatorsUpdate="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid HorizontalAlignment="Stretch">
+        <!--<Grid.Background>
+            <AcrylicBrush FallbackColor="#FF1E1E1E" TintColor="#FF1E1E1E" TintOpacity="1" BackgroundSource="Backdrop"/>
+        </Grid.Background>
+        <TextBlock Text="Welcome to Atlass Editor!" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="34" SelectionChanged="TextBlock_SelectionChanged" FontFamily="Google Sans"/>
+        --><!--<TextBlock Text="Atlass Editor is " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0" FontSize="28"/>--><!--
+        <Image Source="Assets/LogoLight.png" Width="150" Height="150" Margin="0,0,0,200" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+
+    </Grid>
+</Page>

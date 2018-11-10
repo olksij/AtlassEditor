@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Geometry x:Key="eMailIcon">M0,8.5909986L28.326799,29.197784C32.25,32.373585,35.237099,29.385284,35.237099,29.385284L64,8.5909986 64,47.064999 0,47.064999z M0,0L63.875,0 63.875,3.7343616 32.872349,26.146971C32.872349,26.146971,31.87495,27.018066,31.127552,26.271971L0,3.4856424z</Geometry>
+</ResourceDictionary>
